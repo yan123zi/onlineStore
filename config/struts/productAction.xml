@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="product" namespace="/" extends="shop">
+			<!-- 商品的action -->
+			<action name="product_*" class="productAction" method="{1}">
+				<result name="productPage">/WEB-INF/jsps/product.jsp</result>
+				<result name="findByCid">/WEB-INF/jsps/productList.jsp</result>
+				<result name="findByCsid">/WEB-INF/jsps/productList.jsp</result>
+				<allowed-methods>findByPid,findByCid,findByCsid</allowed-methods>
+			</action>
+		</package>
+	</struts>

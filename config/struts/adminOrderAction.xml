@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="adminOrder" namespace="/" extends="shop">
+			<!-- 后台订单的action -->
+			<action name="adminOrder_*" class="adminOrderAction" method="{1}">
+				<result name="findAll">/admin/order/list.jsp</result>
+				<result name="findOrderItem">/admin/order/orderItem.jsp</result>
+				<result name="updateSuccess" type="redirectAction">adminOrder_findAllByPage.action?page=1</result>
+				<interceptor-ref name="AdminLimitInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<allowed-methods>findAllByPage,findOrderItem,update,findByState</allowed-methods>
+			</action>
+		</package>
+	</struts>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="adminCategory" namespace="/" extends="shop">
+			<!-- 后台一级分类的action -->
+			<action name="adminCategory_*" class="adminCategoryAction" method="{1}">
+				<result name="findAllCategory">/admin/category/list.jsp</result>
+				<result name="saveSuccess" type="redirectAction">adminCategory_findAll.action</result>
+				<result name="deleteSuccess" type="redirectAction">adminCategory_findAll.action</result>
+				<result name="findCidSuccess">/admin/category/edit.jsp</result>
+				<result name="editSuccess" type="redirectAction">adminCategory_findAll.action</result>
+				<interceptor-ref name="AdminLimitInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<allowed-methods>findAll,save,delete,edit,update</allowed-methods>
+			</action>
+		</package>
+	</struts>

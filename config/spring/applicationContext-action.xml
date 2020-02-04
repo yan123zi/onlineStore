@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+   		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop.xsd
+	        http://www.springframework.org/schema/tx
+	        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	        <!-- action的配置===================================
+	    ==================================================
+	     -->
+	    <!-- 首页访问的action -->
+	    <bean id="indexAction" class="cn.pxxy.shop.index.action.IndexAction" scope="prototype">
+	    	<property name="categoryService" ref="categoryService"></property>
+	    	<property name="productService" ref="productService"></property>
+	    </bean>
+	    <!-- 用户模块的action -->
+	    <bean id="userAction" class="cn.pxxy.shop.user.action.UserAction" scope="prototype">
+	    	<property name="userService" ref="userService"></property>
+	    </bean>
+	    <!-- 配置验证码的action -->
+	    <bean id="CheckImg" class="cn.pxxy.shop.user.action.CheckImgAction" scope="prototype"></bean>
+	    <!-- 配置商品的action -->
+	    <bean id="productAction" class="cn.pxxy.shop.product.action.ProductAction" scope="prototype">
+	    	<property name="productService" ref="productService"></property>
+	    	<property name="categoryService" ref="categoryService"></property>
+	    </bean>
+	    <!-- 配置购物车的action -->
+	    <bean id="cartAction" class="cn.pxxy.shop.cart.action.CartAction" scope="prototype">
+	    	<property name="productService" ref="productService"></property>
+	    </bean>
+	    <!-- 订单模块action -->
+	    <bean id="orderAction" class="cn.pxxy.shop.order.action.OrderAction" scope="prototype">
+	    	<property name="orderService" ref="orderService"></property>
+	    </bean>
+	    <!-- 管理员模块action -->
+	    <bean id="adminAction" class="cn.pxxy.shop.adminuser.action.AdminUserAction" scope="prototype">
+	    	<property name="adminUserService" ref="adminUserService"></property>
+	    </bean>
+	    <!-- 管理一级分类的action -->
+	    <bean id="adminCategoryAction" class="cn.pxxy.shop.category.admincategory.AdminCategoryAction" scope="prototype">
+	    	<property name="categoryService" ref="categoryService"></property>
+	    </bean>
+	    <!-- 管理二级分类的action -->
+	    <bean id="adminCategorySecondAction" class="cn.pxxy.shop.categorysecond.adminAction.AdminCategorySecondAction" scope="prototype">
+	    	<property name="categorySecondService" ref="categorySecondService"></property>
+	    	<property name="categoryService" ref="categoryService"></property>
+	    </bean>
+	    <!-- 管理商品的action -->
+	    <bean id="adminProductAction" class="cn.pxxy.shop.product.adminAction.AdminProductAction" scope="prototype">
+	    	<property name="productService" ref="productService"></property>
+	    	<property name="categorySecondService" ref="categorySecondService"></property>
+	    </bean>
+	    <!-- 管理订单的action -->
+	    <bean id="adminOrderAction" class="cn.pxxy.shop.order.adminAction.AdminOrderAction" scope="prototype">
+	    	<property name="orderService" ref="orderService"></property>
+	    </bean>
+</beans>

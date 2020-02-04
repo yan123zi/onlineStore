@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="adminSecondCategory" namespace="/" extends="shop">
+			<!-- 后台二级分类action -->
+			<action name="adminCategorySecond_*" class="adminCategorySecondAction" method="{1}">
+				<result name="findAllSuccess">/admin/categorySecond/list.jsp</result>
+				<result name="addPageSuccess">/admin/categorySecond/add.jsp</result>
+				<result name="saveSuccess" type="redirectAction">adminCategorySecond_findAllByPage.action?page=1</result>
+				<result name="deleteSuccess" type="redirectAction">adminCategorySecond_findAllByPage.action?page=1</result>
+				<result name="editSuccess">/admin/categorySecond/edit.jsp</result>		
+				<result name="updateSuccess" type="redirectAction">adminCategorySecond_findAllByPage.action?page=1</result>
+				<interceptor-ref name="AdminLimitInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<allowed-methods>findAllByPage,addPage,save,edit,update</allowed-methods>
+			</action>
+		</package>
+	</struts>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+   		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop.xsd
+	        http://www.springframework.org/schema/tx
+	        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	        <!-- Service的配置=================================== 
+	    ===================================================
+	    -->
+	    <!-- 用户模块 的service-->
+	    <bean id="userService" class="cn.pxxy.shop.user.service.UserService">
+	    	<property name="userDao" ref="userDao"></property>
+	    	<property name="mailSender" ref="mailSender"></property>
+	    </bean>
+	    <!-- 商品一级分类类目 的service-->
+	    <bean id="categoryService" class="cn.pxxy.shop.category.service.CategoryService">
+	    	<property name="CategoryDao" ref="CategoryDao"></property>
+	    </bean>
+	    <!-- 商品的service -->
+	    <bean id="productService" class="cn.pxxy.shop.product.service.ProductService">
+	    	<property name="productDao" ref="productDao"></property>
+	    </bean>
+	    <!-- 订单的service -->
+	    <bean id="orderService" class="cn.pxxy.shop.order.service.OrderService">
+	    	<property name="orderDao" ref="orderDao"></property>
+	    </bean>
+	    <!-- 管理员的service -->
+	    <bean id="adminUserService" class="cn.pxxy.shop.adminuser.service.AdminUserService">
+	    	<property name="adminUserDao" ref="adminUserDao"></property>
+	    </bean>
+	    <!-- 二级分类的service -->
+	    <bean id="categorySecondService" class="cn.pxxy.shop.categorysecond.service.CategorySecondService">
+	    	<property name="categorySecondDao" ref="categorySecondDao"></property>
+	    </bean>
+</beans>

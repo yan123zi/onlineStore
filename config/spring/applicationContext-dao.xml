@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+   		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop.xsd
+	        http://www.springframework.org/schema/tx
+	        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	         <!-- dao的配置======================================== 
+	    ====================================================
+	    -->
+	    <!-- 用户模块的dao -->
+	    <bean id="userDao" class="cn.pxxy.shop.user.dao.UserDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+	    <!-- 商品一级类目的dao -->
+	    <bean id="CategoryDao" class="cn.pxxy.shop.category.dao.CategoryDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+	    <!-- 商品的dao -->
+	    <bean id="productDao" class="cn.pxxy.shop.product.dao.ProductDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+	    <!-- 订单的dao -->
+	    <bean id="orderDao" class="cn.pxxy.shop.order.dao.OrderDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+	    <!-- 管理员的dao -->
+	    <bean id="adminUserDao" class="cn.pxxy.shop.adminuser.dao.AdminUserDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+	    <!-- 二级分类的dao -->
+	    <bean id="categorySecondDao" class="cn.pxxy.shop.categorysecond.dao.CategorySecondDao">
+	    	<property name="sessionFactory" ref="sessionFactory"></property>
+	    </bean>
+</beans>

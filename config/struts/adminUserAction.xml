@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="adminUser" namespace="/" extends="shop">
+			<!-- 管理员的action -->
+			<action name="adminUser_*" class="adminAction" method="{1}">
+				<result name="loginFail">/admin/index.jsp</result>
+				<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
+				<allowed-methods>login</allowed-methods>
+			</action>
+		</package>
+	</struts>

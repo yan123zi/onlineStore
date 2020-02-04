@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+	<struts>
+		<package name="adminProduct" namespace="/" extends="shop">
+			<!-- 后台商品的action -->
+			<action name="adminProduct_*" class="adminProductAction" method="{1}">
+				<result name="findPageSuccess">/admin/product/list.jsp</result>
+				<result name="addPageSuccess">/admin/product/add.jsp</result>
+				<result name="saveSuccess" type="redirectAction">adminProduct_findAllByPage.action?page=1</result>
+				<result name="deleteSuccess" type="redirectAction">adminProduct_findAllByPage.action?page=1</result>
+				<result name="editSuccess">/admin/product/edit.jsp</result>
+				<result name="updateSuccess" type="redirectAction">adminProduct_findAllByPage.action?page=1</result>
+				<interceptor-ref name="AdminLimitInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<allowed-methods>findAllByPage,addProduct,save,delete,edit,update</allowed-methods>
+			</action>
+		</package>
+	</struts>

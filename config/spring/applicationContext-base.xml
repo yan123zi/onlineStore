@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+   		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop.xsd
+	        http://www.springframework.org/schema/tx
+	        http://www.springframework.org/schema/tx/spring-tx.xsd">
+		<!-- 配置连接池： -->
+		<!-- 引入外部属性文件 -->
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">  
+		        <list>  
+		            <value>classpath:jdbc.properties</value>  
+		            <value>classpath:MailFrom.properties</value>
+		        </list>  
+	    	</property>  
+	    	<property name="ignoreUnresolvablePlaceholders" value="true" />   
+		</bean>
+		<!-- 配置c3p0连接池 -->
+		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="driverClass" value="${jdbc.driver}"></property>
+			<property name="jdbcUrl" value="${jdbc.url}"></property>
+			<property name="user"  value="${jdbc.name}"></property>
+			<property name="password"  value="${jdbc.password}"></property>
+			<property name="testConnectionOnCheckout" value="true"></property>
+			<property name="testConnectionOnCheckin" value="false"></property>
+			<property name="initialPoolSize" value="10"></property>
+			<property name="preferredTestQuery" value="SELECT 1"/>		
+		</bean>
+		<!-- hibernate的相关信息 -->
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+			<!-- 注入连接池 -->
+			<property name="dataSource" ref="dataSource"></property>
+			<!-- 配置hibernate的内容 -->
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				</props>
+			</property>
+			<!-- 配置hibernate的所有映射文件路径 -->
+			<property name="mappingDirectoryLocations" value="classpath:cn/pxxy/shop/mappingResources"></property>
+		</bean>
+		<!-- 事物管理器 -->
+		<bean id="transactionManager"
+	        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+	        <property name="sessionFactory" ref="sessionFactory" />
+	    </bean>
+	    <!-- 开启事务注解 -->
+	    <tx:annotation-driven transaction-manager="transactionManager"/>
+	    <!-- 配置邮箱 -->
+	    <bean id="mailSender"  
+        class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+        <property name="host" value="${mail.smtp.host}"/>
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="javaMailProperties">  
+            <props>  
+               <prop key="mail.smtp.auth">${mail.smtp.auth}</prop> 
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>  
+                <!-- 下面三个是开启ssl安全套接层的配置 -->
+                <prop key="mail.smtp.socketFactory.fallback">false</prop>  
+                <prop key="mail.smtp.starttls.enable">true</prop>    
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>  
+            </props>  
+        </property>  
+        <property name="username">  
+             <value>${mail.smtp.username}</value> <!-- 邮箱的用户名，注意要写正确了 -->  
+        </property>  
+        <property name="password">  
+            <value>${mail.smtp.password}</value> <!-- 邮箱密码 -->  
+        </property>  
+         <property name="port">  
+        <value>${mail.smtp.port}</value>  
+        </property>  
+    	</bean>
+</beans>
